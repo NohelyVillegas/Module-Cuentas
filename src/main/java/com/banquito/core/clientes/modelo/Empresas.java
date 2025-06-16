@@ -1,20 +1,16 @@
 package com.banquito.core.clientes.modelo;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.Objects;
 
 @Entity
 @Table(name = "empresas", schema = "public")
 public class Empresas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('empresas_id_empresa_seq')")
     @Column(name = "id_empresa", nullable = false)
     private Integer id;
 
@@ -51,18 +47,19 @@ public class Empresas {
     @Column(name = "estado", nullable = false, length = 15)
     private String estado;
 
-    @Column(name = "version", nullable = false, precision = 9)
-    private BigDecimal version;
+    @Version
+    @Column(name = "version", nullable = false)
+    private Long version;
 
-    @OneToMany(mappedBy = "idParticipe")
-    private Set<AccionistasEmpresas> accionistasEmpresas = new LinkedHashSet<>();
+    // Constructores
+    public Empresas() {
+    }
 
-    @OneToMany(mappedBy = "idEntidad")
-    private Set<Clientes> clientes = new LinkedHashSet<>();
+    public Empresas(Integer id) {
+        this.id = id;
+    }
 
-    @OneToMany(mappedBy = "idEmpresa")
-    private Set<com.banquito.core.clientes.modelo.RepresentantesEmpresas> representantesEmpresas = new LinkedHashSet<>();
-
+    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -159,36 +156,45 @@ public class Empresas {
         this.estado = estado;
     }
 
-    public BigDecimal getVersion() {
+    public Long getVersion() {
         return version;
     }
 
-    public void setVersion(BigDecimal version) {
+    public void setVersion(Long version) {
         this.version = version;
     }
 
-    public Set<AccionistasEmpresas> getAccionistasEmpresas() {
-        return accionistasEmpresas;
+    // equals y hashCode usando solo la clave primaria
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Empresas empresas = (Empresas) o;
+        return Objects.equals(id, empresas.id);
     }
 
-    public void setAccionistasEmpresas(Set<AccionistasEmpresas> accionistasEmpresas) {
-        this.accionistasEmpresas = accionistasEmpresas;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
-    public Set<Clientes> getClientes() {
-        return clientes;
+    // toString con todas las propiedades
+    @Override
+    public String toString() {
+        return "Empresas{" +
+                "id=" + id +
+                ", tipoIdentificacion='" + tipoIdentificacion + '\'' +
+                ", numeroIdentificacion='" + numeroIdentificacion + '\'' +
+                ", nombreComercial='" + nombreComercial + '\'' +
+                ", razonSocial='" + razonSocial + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", fechaConstitucion=" + fechaConstitucion +
+                ", correoElectronico='" + correoElectronico + '\'' +
+                ", sectorEconomico='" + sectorEconomico + '\'' +
+                ", fechaRegistro=" + fechaRegistro +
+                ", fechaActualizacion=" + fechaActualizacion +
+                ", estado='" + estado + '\'' +
+                ", version=" + version +
+                '}';
     }
-
-    public void setClientes(Set<Clientes> clientes) {
-        this.clientes = clientes;
-    }
-
-    public Set<com.banquito.core.clientes.modelo.RepresentantesEmpresas> getRepresentantesEmpresas() {
-        return representantesEmpresas;
-    }
-
-    public void setRepresentantesEmpresas(Set<com.banquito.core.clientes.modelo.RepresentantesEmpresas> representantesEmpresas) {
-        this.representantesEmpresas = representantesEmpresas;
-    }
-
 }

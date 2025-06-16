@@ -1,26 +1,24 @@
 package com.banquito.core.clientes.modelo;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "direcciones_clientes", schema = "public")
 public class DireccionesClientes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('direcciones_clientes_id_direccion_seq')")
     @Column(name = "id_direccion", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente", nullable = false)
     private Clientes idCliente;
+
+    @Column(name = "id_cliente", insertable = false, updatable = false)
+    private Integer idClienteId;
 
     @Column(name = "tipo", nullable = false, length = 15)
     private String tipo;
@@ -46,9 +44,19 @@ public class DireccionesClientes {
     @Column(name = "estado", nullable = false, length = 15)
     private String estado;
 
-    @Column(name = "version", nullable = false, precision = 9)
-    private BigDecimal version;
+    @Version
+    @Column(name = "version", nullable = false)
+    private Long version;
 
+    // Constructores
+    public DireccionesClientes() {
+    }
+
+    public DireccionesClientes(Integer id) {
+        this.id = id;
+    }
+
+    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -63,6 +71,14 @@ public class DireccionesClientes {
 
     public void setIdCliente(Clientes idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public Integer getIdClienteId() {
+        return idClienteId;
+    }
+
+    public void setIdClienteId(Integer idClienteId) {
+        this.idClienteId = idClienteId;
     }
 
     public String getTipo() {
@@ -129,12 +145,43 @@ public class DireccionesClientes {
         this.estado = estado;
     }
 
-    public BigDecimal getVersion() {
+    public Long getVersion() {
         return version;
     }
 
-    public void setVersion(BigDecimal version) {
+    public void setVersion(Long version) {
         this.version = version;
     }
 
+    // equals y hashCode usando solo la clave primaria
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DireccionesClientes that = (DireccionesClientes) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    // toString con todas las propiedades
+    @Override
+    public String toString() {
+        return "DireccionesClientes{" +
+                "id=" + id +
+                ", idClienteId=" + idClienteId +
+                ", tipo='" + tipo + '\'' +
+                ", linea1='" + linea1 + '\'' +
+                ", linea2='" + linea2 + '\'' +
+                ", codigoPostal='" + codigoPostal + '\'' +
+                ", codigoGeografico='" + codigoGeografico + '\'' +
+                ", fechaCreacion=" + fechaCreacion +
+                ", fechaActualizacion=" + fechaActualizacion +
+                ", estado='" + estado + '\'' +
+                ", version=" + version +
+                '}';
+    }
 }

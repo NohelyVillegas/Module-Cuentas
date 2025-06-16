@@ -2,11 +2,9 @@ package com.banquito.core.clientes.modelo;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.Objects;
 
 @Entity
 @Table(name = "personas", schema = "public")
@@ -50,15 +48,19 @@ public class Persona {
     @Column(name = "estado", nullable = false, length = 15)
     private String estado;
 
-    @Column(name = "version", nullable = false, precision = 9)
-    private BigDecimal version;
+    @Version
+    @Column(name = "version", nullable = false)
+    private Long version;
 
-    @OneToMany(mappedBy = "idParticipe")
-    private Set<AccionistasEmpresas> accionistasEmpresas = new LinkedHashSet<>();
+    // Constructores
+    public Persona() {
+    }
 
-    @OneToMany(mappedBy = "idEntidad")
-    private Set<Clientes> clientes = new LinkedHashSet<>();
+    public Persona(Integer id) {
+        this.id = id;
+    }
 
+    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -155,28 +157,45 @@ public class Persona {
         this.estado = estado;
     }
 
-    public BigDecimal getVersion() {
+    public Long getVersion() {
         return version;
     }
 
-    public void setVersion(BigDecimal version) {
+    public void setVersion(Long version) {
         this.version = version;
     }
 
-    public Set<AccionistasEmpresas> getAccionistasEmpresas() {
-        return accionistasEmpresas;
+    // equals y hashCode usando solo la clave primaria
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Persona persona = (Persona) o;
+        return Objects.equals(id, persona.id);
     }
 
-    public void setAccionistasEmpresas(Set<AccionistasEmpresas> accionistasEmpresas) {
-        this.accionistasEmpresas = accionistasEmpresas;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
-    public Set<Clientes> getClientes() {
-        return clientes;
+    // toString con todas las propiedades
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id=" + id +
+                ", tipoIdentificacion='" + tipoIdentificacion + '\'' +
+                ", numeroIdentificacion='" + numeroIdentificacion + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", genero='" + genero + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", estadoCivil='" + estadoCivil + '\'' +
+                ", nivelEstudio='" + nivelEstudio + '\'' +
+                ", correoElectronico='" + correoElectronico + '\'' +
+                ", fechaRegistro=" + fechaRegistro +
+                ", fechaActualizacion=" + fechaActualizacion +
+                ", estado='" + estado + '\'' +
+                ", version=" + version +
+                '}';
     }
-
-    public void setClientes(Set<Clientes> clientes) {
-        this.clientes = clientes;
-    }
-
 }

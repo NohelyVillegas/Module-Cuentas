@@ -2,35 +2,47 @@ package com.banquito.core.clientes.modelo;
 
 import com.banquito.core.general.modelo.Sucursales;
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 
-import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "clientes_sucursales", schema = "public")
 public class ClientesSucursales {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('clientes_sucursales_id_cliente_sucursal_seq')")
     @Column(name = "id_cliente_sucursal", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente", nullable = false)
     private Clientes idCliente;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Column(name = "id_cliente", insertable = false, updatable = false)
+    private Integer idClienteId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codigo_sucursal", nullable = false)
     private Sucursales codigoSucursal;
 
-    @ColumnDefault("'ACTIVO'")
+    @Column(name = "codigo_sucursal", insertable = false, updatable = false)
+    private String codigoSucursalId;
+
     @Column(name = "estado", nullable = false, length = 15)
     private String estado;
 
-    @ColumnDefault("0")
-    @Column(name = "version", nullable = false, precision = 9)
-    private BigDecimal version;
+    @Version
+    @Column(name = "version", nullable = false)
+    private Long version;
 
+    // Constructores
+    public ClientesSucursales() {
+    }
+
+    public ClientesSucursales(Integer id) {
+        this.id = id;
+    }
+
+    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -47,12 +59,28 @@ public class ClientesSucursales {
         this.idCliente = idCliente;
     }
 
+    public Integer getIdClienteId() {
+        return idClienteId;
+    }
+
+    public void setIdClienteId(Integer idClienteId) {
+        this.idClienteId = idClienteId;
+    }
+
     public Sucursales getCodigoSucursal() {
         return codigoSucursal;
     }
 
     public void setCodigoSucursal(Sucursales codigoSucursal) {
         this.codigoSucursal = codigoSucursal;
+    }
+
+    public String getCodigoSucursalId() {
+        return codigoSucursalId;
+    }
+
+    public void setCodigoSucursalId(String codigoSucursalId) {
+        this.codigoSucursalId = codigoSucursalId;
     }
 
     public String getEstado() {
@@ -63,12 +91,37 @@ public class ClientesSucursales {
         this.estado = estado;
     }
 
-    public BigDecimal getVersion() {
+    public Long getVersion() {
         return version;
     }
 
-    public void setVersion(BigDecimal version) {
+    public void setVersion(Long version) {
         this.version = version;
     }
 
+    // equals y hashCode usando solo la clave primaria
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClientesSucursales that = (ClientesSucursales) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    // toString con todas las propiedades
+    @Override
+    public String toString() {
+        return "ClientesSucursales{" +
+                "id=" + id +
+                ", idClienteId=" + idClienteId +
+                ", codigoSucursalId='" + codigoSucursalId + '\'' +
+                ", estado='" + estado + '\'' +
+                ", version=" + version +
+                '}';
+    }
 }
