@@ -1,8 +1,6 @@
 package com.banquito.core.clientes.modelo;
-
 import com.banquito.core.general.modelo.Paises;
 import jakarta.persistence.*;
-
 import java.time.Instant;
 import java.util.Objects;
 

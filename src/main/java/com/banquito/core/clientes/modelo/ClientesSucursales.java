@@ -1,8 +1,6 @@
 package com.banquito.core.clientes.modelo;
-
 import com.banquito.core.general.modelo.Sucursales;
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
 @Entity

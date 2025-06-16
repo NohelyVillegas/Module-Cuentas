@@ -1,7 +1,5 @@
 package com.banquito.core.clientes.modelo;
-
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.util.Objects;
 
