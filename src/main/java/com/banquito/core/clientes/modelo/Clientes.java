@@ -17,10 +17,7 @@ public class Clientes {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_entidad", nullable = false)
-    private com.banquito.core.clientes.modelo.Empresas idEntidad;
-
-    @Column(name = "id_entidad", insertable = false, updatable = false)
-    private Integer idEntidadId;
+    private Empresas idEntidad;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
@@ -28,9 +25,6 @@ public class Clientes {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nacionalidad", nullable = false)
     private Paises nacionalidad;
-
-    @Column(name = "nacionalidad", insertable = false, updatable = false)
-    private Integer nacionalidadId;
 
     @Column(name = "tipo_identificacion", nullable = false, length = 10)
     private String tipoIdentificacion;
@@ -88,20 +82,12 @@ public class Clientes {
         this.tipoEntidad = tipoEntidad;
     }
 
-    public com.banquito.core.clientes.modelo.Empresas getIdEntidad() {
+    public Empresas getIdEntidad() {
         return idEntidad;
     }
 
-    public void setIdEntidad(com.banquito.core.clientes.modelo.Empresas idEntidad) {
+    public void setIdEntidad(Empresas idEntidad) {
         this.idEntidad = idEntidad;
-    }
-
-    public Integer getIdEntidadId() {
-        return idEntidadId;
-    }
-
-    public void setIdEntidadId(Integer idEntidadId) {
-        this.idEntidadId = idEntidadId;
     }
 
     public String getNombre() {
@@ -118,14 +104,6 @@ public class Clientes {
 
     public void setNacionalidad(Paises nacionalidad) {
         this.nacionalidad = nacionalidad;
-    }
-
-    public Integer getNacionalidadId() {
-        return nacionalidadId;
-    }
-
-    public void setNacionalidadId(Integer nacionalidadId) {
-        this.nacionalidadId = nacionalidadId;
     }
 
     public String getTipoIdentificacion() {
@@ -228,9 +206,9 @@ public class Clientes {
         return "Clientes{" +
                 "id=" + id +
                 ", tipoEntidad='" + tipoEntidad + '\'' +
-                ", idEntidadId=" + idEntidadId +
+                ", idEntidad=" + idEntidad +
                 ", nombre='" + nombre + '\'' +
-                ", nacionalidadId=" + nacionalidadId +
+                ", nacionalidad=" + nacionalidad +
                 ", tipoIdentificacion='" + tipoIdentificacion + '\'' +
                 ", numeroIdentificacion='" + numeroIdentificacion + '\'' +
                 ", tipoCliente='" + tipoCliente + '\'' +

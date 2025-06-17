@@ -15,9 +15,6 @@ public class DireccionesClientes {
     @JoinColumn(name = "id_cliente", nullable = false)
     private Clientes idCliente;
 
-    @Column(name = "id_cliente", insertable = false, updatable = false)
-    private Integer idClienteId;
-
     @Column(name = "tipo", nullable = false, length = 15)
     private String tipo;
 
@@ -69,14 +66,6 @@ public class DireccionesClientes {
 
     public void setIdCliente(Clientes idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public Integer getIdClienteId() {
-        return idClienteId;
-    }
-
-    public void setIdClienteId(Integer idClienteId) {
-        this.idClienteId = idClienteId;
     }
 
     public String getTipo() {
@@ -170,7 +159,7 @@ public class DireccionesClientes {
     public String toString() {
         return "DireccionesClientes{" +
                 "id=" + id +
-                ", idClienteId=" + idClienteId +
+                ", idCliente=" + idCliente +
                 ", tipo='" + tipo + '\'' +
                 ", linea1='" + linea1 + '\'' +
                 ", linea2='" + linea2 + '\'' +

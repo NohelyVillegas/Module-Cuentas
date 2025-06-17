@@ -15,9 +15,6 @@ public class ContactosTransaccionalesClientes {
     @JoinColumn(name = "id_cliente", nullable = false)
     private Clientes idCliente;
 
-    @Column(name = "id_cliente", insertable = false, updatable = false)
-    private Integer idClienteId;
-
     @Column(name = "telefono", nullable = false, length = 10)
     private String telefono;
 
@@ -60,14 +57,6 @@ public class ContactosTransaccionalesClientes {
 
     public void setIdCliente(Clientes idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public Integer getIdClienteId() {
-        return idClienteId;
-    }
-
-    public void setIdClienteId(Integer idClienteId) {
-        this.idClienteId = idClienteId;
     }
 
     public String getTelefono() {
@@ -137,7 +126,7 @@ public class ContactosTransaccionalesClientes {
     public String toString() {
         return "ContactosTransaccionalesClientes{" +
                 "id=" + id +
-                ", idClienteId=" + idClienteId +
+                ", idCliente=" + idCliente +
                 ", telefono='" + telefono + '\'' +
                 ", correoElectronico='" + correoElectronico + '\'' +
                 ", fechaCreacion=" + fechaCreacion +

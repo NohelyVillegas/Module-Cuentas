@@ -15,9 +15,6 @@ public class ClientesSucursales {
     @JoinColumn(name = "id_cliente", nullable = false)
     private Clientes idCliente;
 
-    @Column(name = "id_cliente", insertable = false, updatable = false)
-    private Integer idClienteId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codigo_sucursal", nullable = false)
     private Sucursales codigoSucursal;
@@ -55,14 +52,6 @@ public class ClientesSucursales {
 
     public void setIdCliente(Clientes idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public Integer getIdClienteId() {
-        return idClienteId;
-    }
-
-    public void setIdClienteId(Integer idClienteId) {
-        this.idClienteId = idClienteId;
     }
 
     public Sucursales getCodigoSucursal() {
@@ -116,7 +105,7 @@ public class ClientesSucursales {
     public String toString() {
         return "ClientesSucursales{" +
                 "id=" + id +
-                ", idClienteId=" + idClienteId +
+                ", idCliente=" + idCliente +
                 ", codigoSucursalId='" + codigoSucursalId + '\'' +
                 ", estado='" + estado + '\'' +
                 ", version=" + version +

@@ -13,17 +13,11 @@ public class AccionistasEmpresas {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_empresa", nullable = false)
-    private com.banquito.core.clientes.modelo.Empresas idEmpresa;
-
-    @Column(name = "id_empresa", insertable = false, updatable = false)
-    private Integer idEmpresaId;
+    private Empresas idEmpresa;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_participe", nullable = false)
-    private com.banquito.core.clientes.modelo.Empresas idParticipe;
-
-    @Column(name = "id_participe", insertable = false, updatable = false)
-    private Integer idParticipeId;
+    private Empresas idParticipe;
 
     @Column(name = "participacion", nullable = false, precision = 5, scale = 2)
     private BigDecimal participacion;
@@ -55,36 +49,20 @@ public class AccionistasEmpresas {
         this.id = id;
     }
 
-    public com.banquito.core.clientes.modelo.Empresas getIdEmpresa() {
+    public Empresas getIdEmpresa() {
         return idEmpresa;
     }
 
-    public void setIdEmpresa(com.banquito.core.clientes.modelo.Empresas idEmpresa) {
+    public void setIdEmpresa(Empresas idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 
-    public Integer getIdEmpresaId() {
-        return idEmpresaId;
-    }
-
-    public void setIdEmpresaId(Integer idEmpresaId) {
-        this.idEmpresaId = idEmpresaId;
-    }
-
-    public com.banquito.core.clientes.modelo.Empresas getIdParticipe() {
+    public Empresas getIdParticipe() {
         return idParticipe;
     }
 
-    public void setIdParticipe(com.banquito.core.clientes.modelo.Empresas idParticipe) {
+    public void setIdParticipe(Empresas idParticipe) {
         this.idParticipe = idParticipe;
-    }
-
-    public Integer getIdParticipeId() {
-        return idParticipeId;
-    }
-
-    public void setIdParticipeId(Integer idParticipeId) {
-        this.idParticipeId = idParticipeId;
     }
 
     public BigDecimal getParticipacion() {
@@ -138,8 +116,8 @@ public class AccionistasEmpresas {
     public String toString() {
         return "AccionistasEmpresas{" +
                 "id=" + id +
-                ", idEmpresaId=" + idEmpresaId +
-                ", idParticipeId=" + idParticipeId +
+                ", idEmpresa=" + idEmpresa +
+                ", idParticipe=" + idParticipe +
                 ", participacion=" + participacion +
                 ", tipoEntidadParticipe='" + tipoEntidadParticipe + '\'' +
                 ", estado='" + estado + '\'' +

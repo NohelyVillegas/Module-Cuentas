@@ -22,9 +22,6 @@ public class RepresentantesEmpresas {
     @JoinColumn(name = "id_cliente", nullable = false)
     private Clientes idCliente;
 
-    @Column(name = "id_cliente", insertable = false, updatable = false)
-    private Integer idClienteId;
-
     @Column(name = "rol", nullable = false, length = 25)
     private String rol;
 
@@ -79,14 +76,6 @@ public class RepresentantesEmpresas {
         this.idCliente = idCliente;
     }
 
-    public Integer getIdClienteId() {
-        return idClienteId;
-    }
-
-    public void setIdClienteId(Integer idClienteId) {
-        this.idClienteId = idClienteId;
-    }
-
     public String getRol() {
         return rol;
     }
@@ -139,7 +128,7 @@ public class RepresentantesEmpresas {
         return "RepresentantesEmpresas{" +
                 "id=" + id +
                 ", idEmpresaId=" + idEmpresaId +
-                ", idClienteId=" + idClienteId +
+                ", idCliente=" + idCliente +
                 ", rol='" + rol + '\'' +
                 ", fechaAsignacion=" + fechaAsignacion +
                 ", estado='" + estado + '\'' +
