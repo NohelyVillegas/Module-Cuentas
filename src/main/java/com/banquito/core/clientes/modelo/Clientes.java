@@ -3,6 +3,8 @@ import com.banquito.core.general.modelo.Paises;
 import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
 @Entity
 @Table(name = "clientes", schema = "public")
@@ -56,6 +58,21 @@ public class Clientes {
     @Version
     @Column(name = "version", nullable = false)
     private Long version;
+
+    @OneToMany(mappedBy = "idCliente")
+    private Set<com.banquito.core.clientes.modelo.ClientesSucursales> clientesSucursales = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idCliente")
+    private Set<com.banquito.core.clientes.modelo.ContactosTransaccionalesClientes> contactosTransaccionalesClientes = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idCliente")
+    private Set<com.banquito.core.clientes.modelo.DireccionesClientes> direccionesClientes = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idCliente")
+    private Set<com.banquito.core.clientes.modelo.RepresentantesEmpresas> representantesEmpresas = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idCliente")
+    private Set<com.banquito.core.clientes.modelo.TelefonosClientes> telefonosClientes = new LinkedHashSet<>();
 
     // Constructores
     public Clientes() {
@@ -184,6 +201,46 @@ public class Clientes {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public Set<com.banquito.core.clientes.modelo.ClientesSucursales> getClientesSucursales() {
+        return clientesSucursales;
+    }
+
+    public void setClientesSucursales(Set<com.banquito.core.clientes.modelo.ClientesSucursales> clientesSucursales) {
+        this.clientesSucursales = clientesSucursales;
+    }
+
+    public Set<com.banquito.core.clientes.modelo.ContactosTransaccionalesClientes> getContactosTransaccionalesClientes() {
+        return contactosTransaccionalesClientes;
+    }
+
+    public void setContactosTransaccionalesClientes(Set<com.banquito.core.clientes.modelo.ContactosTransaccionalesClientes> contactosTransaccionalesClientes) {
+        this.contactosTransaccionalesClientes = contactosTransaccionalesClientes;
+    }
+
+    public Set<com.banquito.core.clientes.modelo.DireccionesClientes> getDireccionesClientes() {
+        return direccionesClientes;
+    }
+
+    public void setDireccionesClientes(Set<com.banquito.core.clientes.modelo.DireccionesClientes> direccionesClientes) {
+        this.direccionesClientes = direccionesClientes;
+    }
+
+    public Set<com.banquito.core.clientes.modelo.RepresentantesEmpresas> getRepresentantesEmpresas() {
+        return representantesEmpresas;
+    }
+
+    public void setRepresentantesEmpresas(Set<com.banquito.core.clientes.modelo.RepresentantesEmpresas> representantesEmpresas) {
+        this.representantesEmpresas = representantesEmpresas;
+    }
+
+    public Set<com.banquito.core.clientes.modelo.TelefonosClientes> getTelefonosClientes() {
+        return telefonosClientes;
+    }
+
+    public void setTelefonosClientes(Set<com.banquito.core.clientes.modelo.TelefonosClientes> telefonosClientes) {
+        this.telefonosClientes = telefonosClientes;
     }
 
     // equals y hashCode usando solo la clave primaria

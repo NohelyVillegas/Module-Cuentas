@@ -19,9 +19,6 @@ public class ClientesSucursales {
     @JoinColumn(name = "codigo_sucursal", nullable = false)
     private Sucursales codigoSucursal;
 
-    @Column(name = "codigo_sucursal", insertable = false, updatable = false)
-    private String codigoSucursalId;
-
     @Column(name = "estado", nullable = false, length = 15)
     private String estado;
 
@@ -62,14 +59,6 @@ public class ClientesSucursales {
         this.codigoSucursal = codigoSucursal;
     }
 
-    public String getCodigoSucursalId() {
-        return codigoSucursalId;
-    }
-
-    public void setCodigoSucursalId(String codigoSucursalId) {
-        this.codigoSucursalId = codigoSucursalId;
-    }
-
     public String getEstado() {
         return estado;
     }
@@ -106,7 +95,7 @@ public class ClientesSucursales {
         return "ClientesSucursales{" +
                 "id=" + id +
                 ", idCliente=" + idCliente +
-                ", codigoSucursalId='" + codigoSucursalId + '\'' +
+                ", codigoSucursal=" + codigoSucursal +
                 ", estado='" + estado + '\'' +
                 ", version=" + version +
                 '}';
